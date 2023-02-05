@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="408.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.schoolclasses.controller.CustomerController">
+   <children>
+      <ListView fx:id="customerView" layoutX="36.0" layoutY="26.0" onMouseClicked="#customerViewClicked" prefHeight="329.0" prefWidth="200.0" />
+      <TextField fx:id="firstnameField" layoutX="277.0" layoutY="27.0" promptText="*firstname*" />
+      <TextField fx:id="lastnameField" layoutX="467.0" layoutY="27.0" promptText="*lastname*" />
+      <TextField fx:id="zipcodeField" layoutX="277.0" layoutY="77.0" promptText="zipcode" />
+      <TextField fx:id="villageField" layoutX="467.0" layoutY="77.0" promptText="village" />
+      <TextField fx:id="streetField" layoutX="277.0" layoutY="135.0" promptText="street" />
+      <TextField fx:id="streetnumberField" layoutX="467.0" layoutY="135.0" promptText="streetnumber" />
+      <TextField fx:id="emailField" layoutX="277.0" layoutY="188.0" promptText="email" />
+      <ButtonBar layoutX="294.0" layoutY="259.0" prefHeight="40.0" prefWidth="200.0">
+         <buttons>
+            <Button mnemonicParsing="false" onAction="#saveClicked" text="Save" />
+            <Button mnemonicParsing="false" onAction="#createClicked" text="Create" />
+            <Button mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
+         </buttons>
+      </ButtonBar>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="271.0" layoutY="347.0" prefHeight="25.0" prefWidth="347.0" text="Undefined *required Field detected" textAlignment="CENTER" textFill="#cd1717" visible="false" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

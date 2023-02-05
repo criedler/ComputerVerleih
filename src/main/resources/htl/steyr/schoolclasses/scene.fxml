@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.schoolclasses.controller.Controller">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Customers">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#manageCustomers" text="EditCustomers" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Brands">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#manageBrands" text="EditBrands" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Devices">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#manageDevices" text="EditDevices" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
