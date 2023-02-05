@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.schoolclasses.controller.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.Controller">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -26,5 +27,7 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Button layoutX="79.0" layoutY="117.0" mnemonicParsing="false" onAction="#rentClicked" prefHeight="167.0" prefWidth="162.0" text="Borrow" />
+      <Button layoutX="317.0" layoutY="117.0" mnemonicParsing="false" onAction="#returnClicked" prefHeight="167.0" prefWidth="181.0" text="Return" />
    </children>
 </AnchorPane>

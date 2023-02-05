@@ -1,4 +1,4 @@
-package htl.steyr.schoolclasses;
+package htl.steyr.computerRent;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

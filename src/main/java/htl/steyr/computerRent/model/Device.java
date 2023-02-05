@@ -1,4 +1,4 @@
-package htl.steyr.schoolclasses.model;
+package htl.steyr.computerRent.model;
 
 import jakarta.persistence.*;
 

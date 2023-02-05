@@ -1,6 +1,6 @@
-package htl.steyr.schoolclasses.controller;
+package htl.steyr.computerRent.controller;
 
-import htl.steyr.schoolclasses.JavaFxApplication;
+import htl.steyr.computerRent.JavaFxApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

@@ -1,12 +1,11 @@
-package htl.steyr.schoolclasses.model;
+package htl.steyr.computerRent.model;
 
 import jakarta.persistence.*;
-import javafx.collections.ObservableList;
 
 import java.util.List;
 
 @Entity
-@Table(name = "kunde")
+@Table(name = "customer")
 public class Customer {
 
     @Id
@@ -25,15 +24,15 @@ public class Customer {
     @Column
     private String street;
     @Column
-    private int streetnumber;
+    private String streetnumber;
 
-    @Column
+    @Column(nullable = true)
     private String email;
 
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;
 
-    public Customer(String firstname, String lastname, String zipcode, String village, String street, int streetnumber, String email, List<Rental> rentals) {
+    public Customer(String firstname, String lastname, String zipcode, String village, String street, String streetnumber, String email, List<Rental> rentals) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.zipcode = zipcode;
@@ -100,11 +99,11 @@ public class Customer {
         this.street = street;
     }
 
-    public int getStreetnumber() {
+    public String getStreetnumber() {
         return streetnumber;
     }
 
-    public void setStreetnumber(int streetnumber) {
+    public void setStreetnumber(String streetnumber) {
         this.streetnumber = streetnumber;
     }
 

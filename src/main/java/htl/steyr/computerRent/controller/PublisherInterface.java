@@ -1,4 +1,4 @@
-package htl.steyr.schoolclasses.controller;
+package htl.steyr.computerRent.controller;
 
 public interface PublisherInterface<T> {
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="408.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.schoolclasses.controller.CustomerController">
+<AnchorPane prefHeight="408.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.CustomerController">
    <children>
       <ListView fx:id="customerView" layoutX="36.0" layoutY="26.0" onMouseClicked="#customerViewClicked" prefHeight="329.0" prefWidth="200.0" />
       <TextField fx:id="firstnameField" layoutX="277.0" layoutY="27.0" promptText="*firstname*" />

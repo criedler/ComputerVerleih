@@ -6,8 +6,9 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.schoolclasses.controller.BrandController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.BrandController">
    <children>
       <ListView fx:id="brandView" layoutX="29.0" layoutY="27.0" onMouseClicked="#brandViewClicked" prefHeight="342.0" prefWidth="200.0" />
       <TextField fx:id="brandnameField" alignment="CENTER" layoutX="300.0" layoutY="54.0" promptText="*brandname*" />
@@ -18,6 +19,9 @@
           <Button mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
         </buttons>
       </ButtonBar>
-      <Label layoutX="375.0" layoutY="317.0" text="Label" />
+      <Label fx:id="errorLabel" layoutX="339.0" layoutY="319.0" text="Undefined *required field" textFill="#801c1c">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>

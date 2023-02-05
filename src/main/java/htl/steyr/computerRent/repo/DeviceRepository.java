@@ -1,8 +1,8 @@
-package htl.steyr.schoolclasses.repo;
+package htl.steyr.computerRent.repo;
 
-import htl.steyr.schoolclasses.model.Device;
-import htl.steyr.schoolclasses.model.Rental;
+import htl.steyr.computerRent.model.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DeviceRepository extends JpaRepository<Device,Integer> {
+
 }

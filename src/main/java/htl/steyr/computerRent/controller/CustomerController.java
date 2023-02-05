@@ -1,12 +1,11 @@
-package htl.steyr.schoolclasses.controller;
+package htl.steyr.computerRent.controller;
 
-import htl.steyr.schoolclasses.model.Customer;
-import htl.steyr.schoolclasses.repo.CustomerRepository;
+import htl.steyr.computerRent.model.Customer;
+import htl.steyr.computerRent.repo.CustomerRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +36,7 @@ public class CustomerController extends AbstractController {
 
 
     public void initialize() {
+        errorLabel.setVisible(false);
         customerView.getItems().setAll(customerRepo.findAll());
     }
 
@@ -44,15 +44,15 @@ public class CustomerController extends AbstractController {
         errorLabel.setVisible(false);
         if (customerSelected == null) {
             customerSelected = new Customer();
-        } else {
-            customerSelected.setFirstname(firstnameField.getText());
-            customerSelected.setLastname(lastnameField.getText());
-            customerSelected.setZipcode(zipcodeField.getText());
-            customerSelected.setVillage(villageField.getText());
-            customerSelected.setStreet(streetField.getText());
-            customerSelected.setStreetnumber(Integer.parseInt(streetnumberField.getText()));
-            customerSelected.setEmail(emailField.getText());
         }
+        customerSelected.setFirstname(firstnameField.getText());
+        customerSelected.setLastname(lastnameField.getText());
+        customerSelected.setZipcode(zipcodeField.getText());
+        customerSelected.setVillage(villageField.getText());
+        customerSelected.setStreet(streetField.getText());
+        customerSelected.setStreetnumber(streetnumberField.getText());
+        customerSelected.setEmail(emailField.getText());
+
         try {
             customerRepo.save(customerSelected);
         } catch (RuntimeException e) {
@@ -76,9 +76,8 @@ public class CustomerController extends AbstractController {
         if (customerSelected != null) {
             customerRepo.delete(customerSelected);
             customerView.getItems().setAll(customerRepo.findAll());
-        } else {
-            createClicked();
         }
+        createClicked();
         initialize();
     }
 
