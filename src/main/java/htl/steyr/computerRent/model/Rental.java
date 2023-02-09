@@ -1,8 +1,10 @@
 package htl.steyr.computerRent.model;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="rental")
@@ -13,10 +15,10 @@ public class Rental {
     private int rentalID;
 
     @Column(nullable = false)
-    private Date dateOfIssue;
+    private LocalDate dateOfIssue;
 
     @Column(nullable = false)
-    private Date returnDate;
+    private LocalDate returnDate;
 
     @ManyToOne
     @JoinColumn(name= "customer_id", nullable = false)
@@ -26,7 +28,7 @@ public class Rental {
     @JoinColumn(name= "device_id", nullable = false)
     private Device device;
 
-    public Rental(Date dateOfIssue, Date returnDate, Customer customer, Device device) {
+    public Rental(LocalDate dateOfIssue, LocalDate returnDate, Customer customer, Device device) {
         this.dateOfIssue = dateOfIssue;
         this.returnDate = returnDate;
         this.customer = customer;
@@ -49,19 +51,19 @@ public class Rental {
         this.rentalID = rentalID;
     }
 
-    public Date getDateOfIssue() {
+    public LocalDate getDateOfIssue() {
         return dateOfIssue;
     }
 
-    public void setDateOfIssue(Date dateOfIssue) {
+    public void setDateOfIssue(LocalDate dateOfIssue) {
         this.dateOfIssue = dateOfIssue;
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 

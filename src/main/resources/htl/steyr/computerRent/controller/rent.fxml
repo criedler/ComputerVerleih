@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ListView?>
@@ -10,6 +11,7 @@
       <ListView fx:id="deviceView" layoutX="34.0" layoutY="46.0" onMouseClicked="#deviceViewClicked" prefHeight="309.0" prefWidth="200.0" />
       <DatePicker fx:id="startDate" layoutX="276.0" layoutY="68.0" onAction="#startDateSelected" promptText="Start of period" />
       <DatePicker fx:id="endDate" disable="true" layoutX="276.0" layoutY="137.0" onAction="#endDateSelected" promptText="End of Period" />
-      <ChoiceBox fx:id="brandChoiceBox" layoutX="276.0" layoutY="201.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="brandChoiceBox" layoutX="276.0" layoutY="201.0" onAction="#filterByBrand" prefWidth="150.0" />
+      <Button layoutX="450.0" layoutY="201.0" mnemonicParsing="false" onAction="#clearFilter" text="clear" />
    </children>
 </AnchorPane>

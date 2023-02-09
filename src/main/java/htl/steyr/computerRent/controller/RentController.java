@@ -1,20 +1,24 @@
 package htl.steyr.computerRent.controller;
 
 import htl.steyr.computerRent.model.Brand;
+import htl.steyr.computerRent.model.Customer;
 import htl.steyr.computerRent.model.Device;
+import htl.steyr.computerRent.model.Rental;
+import htl.steyr.computerRent.repo.BrandRepository;
+import htl.steyr.computerRent.repo.CustomerRepository;
 import htl.steyr.computerRent.repo.DeviceRepository;
+import htl.steyr.computerRent.repo.RentalRepository;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Component
 public class RentController extends AbstractController {
@@ -23,38 +27,86 @@ public class RentController extends AbstractController {
     public DatePicker startDate;
     public DatePicker endDate;
     public ChoiceBox<Brand> brandChoiceBox;
+    public Button rentBtn;
 
     @Autowired
     private DeviceRepository deviceRepo;
+    @Autowired
+    private RentalRepository rentalRepo;
+    @Autowired
+    private CustomerRepository customerRepo;
+    @Autowired
+    private BrandRepository brandRepo;
 
-    public void initialize(){
+    public ListView<Customer> selectCustomerView;
+
+    private Customer customerSelected;
+
+    private Device deviceSelected;
+
+
+    public void initialize() {
+        brandChoiceBox.getItems().setAll(brandRepo.findAll());
     }
 
     public void deviceViewClicked(MouseEvent mouseEvent) {
-        if(mouseEvent.getClickCount() == 2){
+        if (mouseEvent.getClickCount() == 2) {
+            deviceSelected = deviceView.getSelectionModel().getSelectedItem();
             try {
-                SelectCustomerController c = loadFxmlFile("selectCustomer.fxml", "Select Customer", mainPane.getScene().getWindow(), SelectCustomerController.class);
+                RentController c = loadFxmlFile("selectCustomer.fxml", "Select Customer", mainPane.getScene().getWindow(), RentController.class);
+                selectCustomerView.getItems().setAll(customerRepo.findAll());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
     public void startDateSelected(ActionEvent actionEvent) {
-        endDate.setDayCellFactory(datePicker -> new DateCell(){
-            public void updateItem(LocalDate date, boolean empty){
-                super.updateItem(date,empty);
-                setDisable(empty || date.compareTo(startDate.getValue())<0);
+        endDate.setDisable(false);
+        deviceView.getItems().clear();
+        endDate.setValue(null);
+        endDate.setDayCellFactory(datePicker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(empty || date.compareTo(startDate.getValue()) < 0);
             }
         });
-        endDate.setDisable(false);
     }
 
     public void endDateSelected(ActionEvent actionEvent) {
-        loadDeviceView();
+        if (endDate.getValue() != null) {
+            loadDeviceView();
+        }
     }
 
     private void loadDeviceView() {
-        deviceView.getItems().setAll(deviceRepo.findAll());
+        deviceView.getItems().setAll(deviceRepo.findAvaiableDevices(startDate.getValue(), endDate.getValue()));
+    }
+
+    public void filterByBrand(ActionEvent actionEvent) {
+        Brand selected = brandChoiceBox.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            deviceView.getItems().setAll(deviceRepo.filterByBrand(selected.getName(), startDate.getValue(), endDate.getValue()));
+        }
+    }
+
+
+    public void rentNowClicked(ActionEvent actionEvent) {
+        LocalDate startPeriod = startDate.getValue();
+        LocalDate endPeriod = endDate.getValue();
+        Rental rental = new Rental(startPeriod, endPeriod, customerSelected, deviceSelected);
+        rentalRepo.save(rental);
+    }
+
+    public void selectCustomerViewClicked(MouseEvent mouseEvent) {
+        customerSelected = selectCustomerView.getSelectionModel().getSelectedItem();
+        rentBtn.setDisable(false);
+    }
+
+    public void clearFilter(ActionEvent actionEvent) {
+        brandChoiceBox.getSelectionModel().select(null);
+        loadDeviceView();
     }
 }

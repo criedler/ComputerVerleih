@@ -18,18 +18,18 @@ public class JavaFxApplication extends Application {
     public void init() throws Exception {
         String[] args = new String[0];
 
-        /**
+        /*
          * Get an "instance" of the spring framework to enable all spring-specific
          * features (dependency injection, autoloading, java persistance api, ...).
          */
         springContext =
                 new SpringApplicationBuilder().
-                        sources(SchoolClassesApplication.class).
+                        sources(ComputerVerleihApplication.class).
                         run(args);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("scene.fxml"));
 
-        /**
+        /*
          * Set spring as the factory (when controllers were generated).
          * So spring is able to do its magic.
          */
