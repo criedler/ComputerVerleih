@@ -13,7 +13,7 @@
       <ButtonBar layoutX="14.0" layoutY="90.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#cancelClicked" text="Cancel" />
-            <Button mnemonicParsing="false" onAction="#returnClicked" prefHeight="25.0" prefWidth="117.0" text="Return" />
+            <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnClicked" prefHeight="25.0" prefWidth="117.0" text="Return" />
         </buttons>
       </ButtonBar>
       <TextField fx:id="chargeCycleField" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="184.0" promptText="Enter amount of charge cycles">
@@ -21,8 +21,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="241.0" layoutY="20.0" mnemonicParsing="false" onAction="#calculatePriceClicked" text="Calculate Price" />
-      <Label fx:id="totalPrice" layoutX="14.0" layoutY="56.0" prefHeight="34.0" prefWidth="107.0">
+      <Label fx:id="totalPriceLbl" layoutX="14.0" layoutY="56.0" prefHeight="34.0" prefWidth="107.0">
          <font>
             <Font size="14.0" />
          </font>
