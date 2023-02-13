@@ -1,9 +1,7 @@
 package htl.steyr.computerRent.model;
 
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
@@ -12,13 +10,16 @@ public class Rental {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rentalID;
+    private int rentalId;
 
     @Column(nullable = false)
     private LocalDate dateOfIssue;
 
     @Column(nullable = false)
     private LocalDate returnDate;
+
+    @Column
+    private double totalCost;
 
     @ManyToOne
     @JoinColumn(name= "customer_id", nullable = false)
@@ -43,12 +44,12 @@ public class Rental {
         return customer + " " + device;
     }
 
-    public int getRentalID() {
-        return rentalID;
+    public int getRentalId() {
+        return rentalId;
     }
 
-    public void setRentalID(int rentalID) {
-        this.rentalID = rentalID;
+    public void setRentalId(int rentalID) {
+        this.rentalId = rentalID;
     }
 
     public LocalDate getDateOfIssue() {

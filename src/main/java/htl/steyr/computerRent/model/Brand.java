@@ -1,6 +1,7 @@
 package htl.steyr.computerRent.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
 
 import java.util.List;
 
@@ -10,10 +11,10 @@ public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int brandID;
-
+    private int brandId;
 
     @Column(nullable = false)
+    @Check(constraints = "name <> ''")
     private String name;
 
     @OneToMany(mappedBy = "brand")
@@ -32,12 +33,12 @@ public class Brand {
         return name;
     }
 
-    public int getBrandID() {
-        return brandID;
+    public int getBrandId() {
+        return brandId;
     }
 
-    public void setBrandID(int brandID) {
-        this.brandID = brandID;
+    public void setBrandId(int brandID) {
+        this.brandId = brandID;
     }
 
     public String getName() {

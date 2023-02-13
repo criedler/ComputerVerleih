@@ -9,25 +9,30 @@ import htl.steyr.computerRent.repo.CustomerRepository;
 import htl.steyr.computerRent.repo.DeviceRepository;
 import htl.steyr.computerRent.repo.RentalRepository;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Component
 public class RentController extends AbstractController {
-    public AnchorPane mainPane;
-    public ListView<Device> deviceView;
-    public DatePicker startDate;
-    public DatePicker endDate;
-    public ChoiceBox<Brand> brandChoiceBox;
-    public Button rentBtn;
+    @FXML
+    private AnchorPane mainPane;
+    @FXML
+    private ListView<Device> deviceView;
+    @FXML
+    private DatePicker startDate;
+    @FXML
+    private DatePicker endDate;
+    @FXML
+    private ChoiceBox<Brand> brandChoiceBox;
+    @FXML
+    private Button rentBtn;
 
     @Autowired
     private DeviceRepository deviceRepo;
@@ -38,7 +43,8 @@ public class RentController extends AbstractController {
     @Autowired
     private BrandRepository brandRepo;
 
-    public ListView<Customer> selectCustomerView;
+    @FXML
+    private ListView<Customer> selectCustomerView;
 
     private Customer customerSelected;
 

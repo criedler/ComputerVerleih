@@ -13,15 +13,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BrandController {
-    public Label errorLabel;
+
+    @FXML
+    private Label errorLabel;
     @FXML
     private ListView<Brand> brandView;
     @FXML
     private TextField brandnameField;
-
     @Autowired
     private BrandRepository brandRepo;
-
     private Brand brandSelected = null;
 
     public void initialize() {
@@ -40,10 +40,10 @@ public class BrandController {
 
         try {
             brandRepo.save(brandSelected);
+            initialize();
         } catch (RuntimeException e) {
             errorLabel.setVisible(true);
         }
-        initialize();
     }
 
     public void createClicked() {

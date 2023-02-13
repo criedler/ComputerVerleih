@@ -1,6 +1,7 @@
 package htl.steyr.computerRent.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
 
 import java.util.List;
 
@@ -10,35 +11,41 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerID;
+    private int customerId;
 
     @Column(nullable = false)
-    private String firstname;
+    @Check(constraints = "first_name <> ''")
+    private String firstName;
 
     @Column(nullable = false)
-    private String lastname;
+    @Check(constraints = "last_name <> ''")
+    private String lastName;
+
     @Column
     private String zipcode;
+
     @Column
     private String village;
+
     @Column
     private String street;
-    @Column
-    private String streetnumber;
 
-    @Column(nullable = true)
+    @Column
+    private String streetNumber;
+
+    @Column
     private String email;
 
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;
 
-    public Customer(String firstname, String lastname, String zipcode, String village, String street, String streetnumber, String email, List<Rental> rentals) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public Customer(String firstName, String lastname, String zipcode, String village, String street, String streetnumber, String email, List<Rental> rentals) {
+        this.firstName = firstName;
+        this.lastName = lastname;
         this.zipcode = zipcode;
         this.village = village;
         this.street = street;
-        this.streetnumber = streetnumber;
+        this.streetNumber = streetnumber;
         this.email = email;
         this.rentals = rentals;
     }
@@ -48,31 +55,31 @@ public class Customer {
 
     @Override
     public String toString() {
-        return firstname + " " + lastname;
+        return firstName + " " + lastName;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(int customerID) {
+        this.customerId = customerID;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
     }
 
     public String getZipcode() {
@@ -99,12 +106,12 @@ public class Customer {
         this.street = street;
     }
 
-    public String getStreetnumber() {
-        return streetnumber;
+    public String getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setStreetnumber(String streetnumber) {
-        this.streetnumber = streetnumber;
+    public void setStreetNumber(String streetnumber) {
+        this.streetNumber = streetnumber;
     }
 
     public String getEmail() {

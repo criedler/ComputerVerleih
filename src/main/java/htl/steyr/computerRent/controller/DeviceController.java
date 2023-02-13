@@ -16,17 +16,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DeviceController {
-
-    public Label errorLabel;
+    @FXML
+    private Label errorLabel;
     @FXML
     private ListView<Device> deviceView;
-
     @FXML
     private TextField modelnameField;
-
     @FXML
     private TextField priceField;
-
     @FXML
     private ChoiceBox<Brand> brandChoiceBox;
 
@@ -57,11 +54,11 @@ public class DeviceController {
 
         try {
             deviceRepo.save(deviceSelected);
+            initialize();
         } catch (RuntimeException e) {
             errorLabel.setVisible(true);
         }
 
-        initialize();
     }
 
     public void createClicked() {

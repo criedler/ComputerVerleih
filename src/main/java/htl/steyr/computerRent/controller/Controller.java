@@ -1,6 +1,7 @@
 package htl.steyr.computerRent.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.stereotype.Component;
 
@@ -8,14 +9,9 @@ import java.io.IOException;
 
 @Component
 public class Controller extends AbstractController {
-    public AnchorPane mainPane;
 
-    public void manageClasses(ActionEvent actionEvent) {
-    }
-
-    public void manageStudents(ActionEvent actionEvent) {
-
-    }
+    @FXML
+    private AnchorPane mainPane;
 
     public void manageCustomers(ActionEvent actionEvent) {
         try {

@@ -7,11 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.InvocationTargetException;
 
 @Component
 public class CustomerController extends AbstractController {
-
     @FXML
     private Label errorLabel;
     @FXML
@@ -45,20 +47,21 @@ public class CustomerController extends AbstractController {
         if (customerSelected == null) {
             customerSelected = new Customer();
         }
-        customerSelected.setFirstname(firstnameField.getText());
-        customerSelected.setLastname(lastnameField.getText());
+        customerSelected.setFirstName(firstnameField.getText());
+        customerSelected.setLastName(lastnameField.getText());
         customerSelected.setZipcode(zipcodeField.getText());
         customerSelected.setVillage(villageField.getText());
         customerSelected.setStreet(streetField.getText());
-        customerSelected.setStreetnumber(streetnumberField.getText());
+        customerSelected.setStreetNumber(streetnumberField.getText());
         customerSelected.setEmail(emailField.getText());
 
         try {
             customerRepo.save(customerSelected);
+            initialize();
         } catch (RuntimeException e) {
             errorLabel.setVisible(true);
         }
-        initialize();
+
     }
 
     public void createClicked() {
@@ -85,12 +88,12 @@ public class CustomerController extends AbstractController {
         customerSelected = customerView.getSelectionModel().getSelectedItem();
 
         if (customerSelected != null) {
-            firstnameField.setText(customerSelected.getFirstname());
-            lastnameField.setText(customerSelected.getLastname());
+            firstnameField.setText(customerSelected.getFirstName());
+            lastnameField.setText(customerSelected.getLastName());
             zipcodeField.setText(customerSelected.getZipcode());
             villageField.setText(customerSelected.getVillage());
             streetField.setText(customerSelected.getStreet());
-            streetnumberField.setText(String.valueOf(customerSelected.getStreetnumber()));
+            streetnumberField.setText(String.valueOf(customerSelected.getStreetNumber()));
             emailField.setText(customerSelected.getEmail());
         }
     }

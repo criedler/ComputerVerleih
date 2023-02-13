@@ -4,8 +4,10 @@ import htl.steyr.computerRent.model.Customer;
 import htl.steyr.computerRent.model.Device;
 import htl.steyr.computerRent.repo.CustomerRepository;
 import htl.steyr.computerRent.repo.DeviceRepository;
+import htl.steyr.computerRent.repo.RentalRepository;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -19,14 +21,23 @@ import java.io.IOException;
 
 @Component
 public class ReturnController extends AbstractController {
-    public ListView<Customer> customerView;
-    public ListView<Device> rentedDevicesView;
-    public AnchorPane mainPane;
-    public TextField chargeCycleField;
-    public double priceForPeriod;
-    public Button returnBtn;
-    public static final double chargeCycle = 0.05;
-    public Label totalPriceLbl;
+    private static final double chargeCycle = 0.05;
+    @FXML
+    private ListView<Customer> customerView;
+    @FXML
+    private ListView<Device> rentedDevicesView;
+    @FXML
+    private AnchorPane mainPane;
+    @FXML
+    private TextField chargeCycleField;
+    @FXML
+    private double priceForPeriod;
+    @FXML
+    private double totalPrice;
+    @FXML
+    private Button returnBtn;
+    @FXML
+    private Label totalPriceLbl;
 
     private Customer customerSelected;
 
@@ -38,6 +49,9 @@ public class ReturnController extends AbstractController {
     @Autowired
     DeviceRepository deviceRepo;
 
+    @Autowired
+    RentalRepository rentalRepo;
+
     public void initialize() {
         customerView.getItems().setAll(customerRepo.findAll());
     }
@@ -45,7 +59,7 @@ public class ReturnController extends AbstractController {
 
     public void customerViewClicked(MouseEvent mouseEvent) {
         customerSelected = customerView.getSelectionModel().getSelectedItem();
-        rentedDevicesView.getItems().setAll(deviceRepo.findOpenRentals(customerSelected.getCustomerID()));
+        rentedDevicesView.getItems().setAll(deviceRepo.findOpenRentals(customerSelected.getCustomerId()));
     }
 
     public void rentedDevicesViewClicked(MouseEvent mouseEvent) {
@@ -57,7 +71,7 @@ public class ReturnController extends AbstractController {
     }
 
     private void setPriceForPeriod() {
-        priceForPeriod = deviceRepo.getTotalPrice(deviceSelected.getDeviceID());
+        priceForPeriod = deviceRepo.getTotalPrice(deviceSelected.getDeviceId());
     }
 
     private void loadDialog() {
@@ -83,7 +97,7 @@ public class ReturnController extends AbstractController {
     }
 
     private void updateTotalPrice(int newValue) {
-        double totalPrice = priceForPeriod + newValue * chargeCycle;
+        totalPrice = priceForPeriod + newValue * chargeCycle;
         totalPriceLbl.setText(String.valueOf(totalPrice));
     }
 
@@ -106,6 +120,6 @@ public class ReturnController extends AbstractController {
     }
 
     public void returnClicked(ActionEvent actionEvent) {
-
+        rentalRepo.insertFinalPrice(deviceSelected.getDeviceId(),totalPrice);
     }
 }
