@@ -2,6 +2,7 @@ package htl.steyr.computerRent.controller;
 
 import htl.steyr.computerRent.model.Customer;
 import htl.steyr.computerRent.model.Device;
+import htl.steyr.computerRent.repo.BrandRepository;
 import htl.steyr.computerRent.repo.CustomerRepository;
 import htl.steyr.computerRent.repo.DeviceRepository;
 import htl.steyr.computerRent.repo.RentalRepository;
@@ -18,9 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
-public class ReturnController extends AbstractController {
+public class ReturnController extends AbstractController implements RepositoryAwareController {
     private static final double chargeCycle = 0.05;
     @FXML
     private ListView<Customer> customerView;
@@ -68,6 +70,7 @@ public class ReturnController extends AbstractController {
         setPriceForPeriod();
         disableBtnOnNullInput();
         onlyAllowNumericInput();
+        checkChargeCycleFieldInput();
     }
 
     private void setPriceForPeriod() {
@@ -86,12 +89,16 @@ public class ReturnController extends AbstractController {
         chargeCycleField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 chargeCycleField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+    }
+
+    private void checkChargeCycleFieldInput() {
+        chargeCycleField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("")) {
+                totalPriceLbl.setText("");
             } else {
-                if (newValue.equals("")) {
-                    totalPriceLbl.setText("");
-                } else {
-                    updateTotalPrice(Integer.parseInt(newValue));
-                }
+                updateTotalPrice(Integer.parseInt(newValue));
             }
         });
     }
@@ -120,6 +127,19 @@ public class ReturnController extends AbstractController {
     }
 
     public void returnClicked(ActionEvent actionEvent) {
-        rentalRepo.insertFinalPrice(deviceSelected.getDeviceId(),totalPrice);
+        rentalRepo.insertFinalPrice(deviceSelected.getDeviceId(), totalPrice);
+    }
+
+    @Override
+    public <T> void setRepository(List<T> repository) {
+        for (Object item : repository) {
+            if (item instanceof CustomerRepository) {
+                customerRepo = (CustomerRepository) item;
+            } else if (item instanceof DeviceRepository) {
+                deviceRepo = (DeviceRepository) item;
+            } else {
+                rentalRepo = (RentalRepository) item;
+            }
+        }
     }
 }

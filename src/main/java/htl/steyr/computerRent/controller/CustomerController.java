@@ -11,9 +11,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 @Component
-public class CustomerController extends AbstractController {
+public class CustomerController extends AbstractController implements RepositoryAwareController {
     @FXML
     private Label errorLabel;
     @FXML
@@ -96,5 +97,10 @@ public class CustomerController extends AbstractController {
             streetnumberField.setText(String.valueOf(customerSelected.getStreetNumber()));
             emailField.setText(customerSelected.getEmail());
         }
+    }
+
+    @Override
+    public <T> void setRepository(List<T> repository) {
+        this.customerRepo=(CustomerRepository) repository.get(0);
     }
 }

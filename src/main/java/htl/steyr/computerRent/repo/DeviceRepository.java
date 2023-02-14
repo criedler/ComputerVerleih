@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
-    @Query(value = "SELECT * FROM device d INNER JOIN brand b on d.brand_id = b.brand_id LEFT OUTER JOIN rental r on device.device_id = r.device_id WHERE b.name=?1 and (return_date < ?2 or date_of_issue  > ?3 or return_date is null) ", nativeQuery = true)
+    @Query(value = "SELECT d.* FROM device d INNER JOIN brand b on d.brand_id = b.brand_id LEFT OUTER JOIN rental r on d.device_id = r.device_id WHERE b.name=?1 and (return_date < ?2 or date_of_issue  > ?3 or return_date is null) ", nativeQuery = true)
     List<Device> filterByBrand(String brandname, LocalDate startDate, LocalDate endDate);
 
     @Query(value = "SELECT d.* FROM device d LEFT OUTER JOIN  rental r on d.device_id = r.device_id WHERE return_date < ?1 or date_of_issue  > ?2 or return_date is null", nativeQuery = true)

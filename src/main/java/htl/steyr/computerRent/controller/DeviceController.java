@@ -14,8 +14,10 @@ import javafx.scene.input.MouseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
-public class DeviceController {
+public class DeviceController implements RepositoryAwareController {
     @FXML
     private Label errorLabel;
     @FXML
@@ -83,6 +85,18 @@ public class DeviceController {
             modelnameField.setText(deviceSelected.getModelName());
             priceField.setText(String.valueOf(deviceSelected.getPrice()));
             brandChoiceBox.getSelectionModel().select(deviceSelected.getBrand());
+        }
+    }
+
+    @Override
+    public <T> void setRepository(List<T> repository) {
+        for (Object item : repository) {
+            if (item instanceof DeviceRepository) {
+                deviceRepo = (DeviceRepository) item;
+            } else {
+                brandRepo = (BrandRepository) item;
+            }
+
         }
     }
 }

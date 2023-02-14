@@ -13,12 +13,10 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
 
-    @Column(nullable = false)
-    @Check(constraints = "first_name <> ''")
+    @Column(columnDefinition = "VARCHAR(255) NOT NULL CHECK (first_name <> '')")
     private String firstName;
 
-    @Column(nullable = false)
-    @Check(constraints = "last_name <> ''")
+    @Column(columnDefinition = "VARCHAR(255) NOT NULL CHECK (last_name <> '')")
     private String lastName;
 
     @Column

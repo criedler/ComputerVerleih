@@ -13,8 +13,7 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int deviceId;
 
-    @Column(nullable = false)
-    @Check(constraints = "model_name <> ''")
+    @Column(columnDefinition = "VARCHAR(255) NOT NULL CHECK (model_name <> '')")
     private String modelName;
 
     @Column(nullable = false)

@@ -18,9 +18,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
-public class RentController extends AbstractController {
+public class RentController extends AbstractController implements RepositoryAwareController{
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -61,7 +62,6 @@ public class RentController extends AbstractController {
             try {
                 RentController c = loadFxmlFile("selectCustomer.fxml", "Select Customer", mainPane.getScene().getWindow(), RentController.class);
                 selectCustomerView.getItems().setAll(customerRepo.findAll());
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -98,7 +98,6 @@ public class RentController extends AbstractController {
         }
     }
 
-
     public void rentNowClicked(ActionEvent actionEvent) {
         LocalDate startPeriod = startDate.getValue();
         LocalDate endPeriod = endDate.getValue();
@@ -114,5 +113,20 @@ public class RentController extends AbstractController {
     public void clearFilter(ActionEvent actionEvent) {
         brandChoiceBox.getSelectionModel().select(null);
         loadDeviceView();
+    }
+
+    @Override
+    public <T> void setRepository(List<T> repository) {
+        for (Object item: repository) {
+            if (item instanceof CustomerRepository) {
+                customerRepo= (CustomerRepository) item;
+            } else if ( item instanceof BrandRepository){
+                brandRepo= (BrandRepository) item;
+            } else if ( item instanceof DeviceRepository){
+                deviceRepo = (DeviceRepository) item;
+            } else {
+                rentalRepo = (RentalRepository) item;
+            }
+        }
     }
 }

@@ -13,8 +13,7 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int brandId;
 
-    @Column(nullable = false)
-    @Check(constraints = "name <> ''")
+    @Column(columnDefinition = "VARCHAR(255) NOT NULL CHECK (name <> '')")
     private String name;
 
     @OneToMany(mappedBy = "brand")

@@ -11,9 +11,10 @@ import javafx.scene.input.MouseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
-public class BrandController {
+import java.util.List;
 
+@Component
+public class BrandController implements RepositoryAwareController {
     @FXML
     private Label errorLabel;
     @FXML
@@ -65,5 +66,10 @@ public class BrandController {
         if (brandSelected != null) {
             brandnameField.setText(brandSelected.getName());
         }
+    }
+
+    @Override
+    public <T> void setRepository(List<T> repository) {
+        this.brandRepo=(BrandRepository) repository.get(0);
     }
 }
