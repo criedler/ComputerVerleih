@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class DeviceController implements SetRepositoryInterface {
+public class DeviceController extends AbstractController implements SetRepositoryInterface {
     @FXML
     private Label errorLabel;
     @FXML
@@ -51,7 +51,7 @@ public class DeviceController implements SetRepositoryInterface {
             deviceSelected = new Device();
         }
         deviceSelected.setModelName(modelnameField.getText());
-        deviceSelected.setPrice(Float.parseFloat(priceField.getText()));
+        deviceSelected.setPrice(Integer.parseInt(priceField.getText()));
         deviceSelected.setBrand(brandChoiceBox.getSelectionModel().getSelectedItem());
 
         try {
@@ -101,5 +101,6 @@ public class DeviceController implements SetRepositoryInterface {
     }
 
     public void backClicked(ActionEvent actionEvent) {
+        loadMainMenu("scene.fxml",deviceView.getScene().getWindow());
     }
 }

@@ -17,7 +17,7 @@ public class Device {
     private String modelName;
 
     @Column(nullable = false)
-    private float price;
+    private int price;
 
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
@@ -27,7 +27,7 @@ public class Device {
     private List<Rental> rentals;
 
 
-    public Device(String modelName, float price, Brand brand, List<Rental> rentals) {
+    public Device(String modelName, int price, Brand brand, List<Rental> rentals) {
         this.modelName = modelName;
         this.price = price;
         this.brand = brand;
@@ -62,7 +62,7 @@ public class Device {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class BrandController implements SetRepositoryInterface {
+public class BrandController extends AbstractController implements SetRepositoryInterface {
     @FXML
     private Label errorLabel;
     @FXML
@@ -79,5 +79,6 @@ public class BrandController implements SetRepositoryInterface {
     }
 
     public void backClicked(ActionEvent actionEvent) {
+        loadMainMenu("scene.fxml",brandView.getScene().getWindow());
     }
 }

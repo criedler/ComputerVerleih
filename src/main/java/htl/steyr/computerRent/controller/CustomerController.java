@@ -1,22 +1,30 @@
 package htl.steyr.computerRent.controller;
 
+import htl.steyr.computerRent.JavaFxApplication;
 import htl.steyr.computerRent.model.Customer;
 import htl.steyr.computerRent.repo.CustomerRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 
 @Component
 public class CustomerController extends AbstractController implements SetRepositoryInterface {
     @FXML
-    private AnchorPane mainPane;
+    private AnchorPane Pane;
     @FXML
     private Label errorLabel;
     @FXML
@@ -44,6 +52,7 @@ public class CustomerController extends AbstractController implements SetReposit
     public void initialize() {
         errorLabel.setVisible(false);
         customerView.getItems().setAll(customerRepo.findAll());
+
     }
 
     public void saveClicked() {
@@ -112,6 +121,6 @@ public class CustomerController extends AbstractController implements SetReposit
     }
 
     public void backClicked(ActionEvent actionEvent) {
-        loadMainMenu("scene.fxml", customerView.getScene().getWindow());
+        loadMainMenu("scene.fxml",Pane.getScene().getWindow());
     }
 }

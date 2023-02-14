@@ -51,7 +51,7 @@ public abstract class AbstractController implements PublisherInterface<Boolean> 
             controller.setRepository(repository);
 
             Scene scene = new Scene(root);
-            Stage currentStage = (Stage) owner.getScene().getWindow();
+            Stage currentStage = (Stage) owner;
             currentStage.setScene(scene);
             currentStage.show();
         } catch (IOException e) {

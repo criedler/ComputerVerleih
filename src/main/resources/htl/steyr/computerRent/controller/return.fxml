@@ -3,6 +3,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.ReturnController">
@@ -11,7 +12,11 @@
       <ListView fx:id="rentedDevicesView" layoutX="303.0" layoutY="50.0" onMouseClicked="#rentedDevicesViewClicked" prefHeight="332.0" prefWidth="200.0" />
       <MenuBar layoutY="2.0" prefHeight="22.0" prefWidth="670.0">
          <menus>
-            <Menu mnemonicParsing="false" onAction="#backClicked" text="Back" />
+            <Menu mnemonicParsing="false" text="Back">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#backClicked" text="MainMenu" />
+               </items>
+            </Menu>
          </menus>
       </MenuBar>
    </children>

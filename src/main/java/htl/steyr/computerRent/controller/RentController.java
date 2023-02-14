@@ -131,5 +131,6 @@ public class RentController extends AbstractController implements SetRepositoryI
     }
 
     public void backClicked(ActionEvent actionEvent) {
+        loadMainMenu("scene.fxml",mainPane.getScene().getWindow());
     }
 }

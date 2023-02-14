@@ -23,7 +23,7 @@ import java.util.List;
 
 @Component
 public class ReturnController extends AbstractController implements SetRepositoryInterface {
-    private static final double chargeCycle = 0.05;
+    private static final int chargeCycle = 5;
     @FXML
     private ListView<Customer> customerView;
     @FXML
@@ -32,10 +32,10 @@ public class ReturnController extends AbstractController implements SetRepositor
     private AnchorPane mainPane;
     @FXML
     private TextField chargeCycleField;
-    @FXML
-    private double priceForPeriod;
-    @FXML
-    private double totalPrice;
+
+    private int priceForPeriod;
+
+    private int totalPrice;
     @FXML
     private Button returnBtn;
     @FXML
@@ -105,7 +105,8 @@ public class ReturnController extends AbstractController implements SetRepositor
 
     private void updateTotalPrice(int newValue) {
         totalPrice = priceForPeriod + newValue * chargeCycle;
-        totalPriceLbl.setText(String.valueOf(totalPrice));
+        totalPriceLbl.setText(totalPrice + " (" + (double) totalPrice /100 + "€)");
+
     }
 
     private void disableBtnOnNullInput() {
@@ -144,5 +145,6 @@ public class ReturnController extends AbstractController implements SetRepositor
     }
 
     public void backClicked(ActionEvent actionEvent) {
+        loadMainMenu("scene.fxml",mainPane.getScene().getWindow());
     }
 }

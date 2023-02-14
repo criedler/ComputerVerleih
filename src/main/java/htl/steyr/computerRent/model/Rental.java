@@ -19,7 +19,7 @@ public class Rental {
     private LocalDate returnDate;
 
     @Column
-    private double totalCost;
+    private Integer totalCost;
 
     @ManyToOne
     @JoinColumn(name= "customer_id", nullable = false)
