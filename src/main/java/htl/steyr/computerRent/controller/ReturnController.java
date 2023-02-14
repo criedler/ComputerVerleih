@@ -2,7 +2,6 @@ package htl.steyr.computerRent.controller;
 
 import htl.steyr.computerRent.model.Customer;
 import htl.steyr.computerRent.model.Device;
-import htl.steyr.computerRent.repo.BrandRepository;
 import htl.steyr.computerRent.repo.CustomerRepository;
 import htl.steyr.computerRent.repo.DeviceRepository;
 import htl.steyr.computerRent.repo.RentalRepository;
@@ -16,13 +15,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
 @Component
-public class ReturnController extends AbstractController implements RepositoryAwareController {
+public class ReturnController extends AbstractController implements SetRepositoryInterface {
     private static final double chargeCycle = 0.05;
     @FXML
     private ListView<Customer> customerView;
@@ -137,9 +137,12 @@ public class ReturnController extends AbstractController implements RepositoryAw
                 customerRepo = (CustomerRepository) item;
             } else if (item instanceof DeviceRepository) {
                 deviceRepo = (DeviceRepository) item;
-            } else {
+            } else if (item instanceof RentalRepository){
                 rentalRepo = (RentalRepository) item;
             }
         }
+    }
+
+    public void backClicked(ActionEvent actionEvent) {
     }
 }

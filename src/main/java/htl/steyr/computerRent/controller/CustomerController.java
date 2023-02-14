@@ -2,19 +2,21 @@ package htl.steyr.computerRent.controller;
 
 import htl.steyr.computerRent.model.Customer;
 import htl.steyr.computerRent.repo.CustomerRepository;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @Component
-public class CustomerController extends AbstractController implements RepositoryAwareController {
+public class CustomerController extends AbstractController implements SetRepositoryInterface {
+    @FXML
+    private AnchorPane mainPane;
     @FXML
     private Label errorLabel;
     @FXML
@@ -35,6 +37,7 @@ public class CustomerController extends AbstractController implements Repository
     private TextField emailField;
     @Autowired
     private CustomerRepository customerRepo;
+
     private Customer customerSelected = null;
 
 
@@ -101,6 +104,14 @@ public class CustomerController extends AbstractController implements Repository
 
     @Override
     public <T> void setRepository(List<T> repository) {
-        this.customerRepo=(CustomerRepository) repository.get(0);
+        for (Object item: repository) {
+            if (item instanceof CustomerRepository) {
+                customerRepo= (CustomerRepository) item;
+            }
+        }
+    }
+
+    public void backClicked(ActionEvent actionEvent) {
+        loadMainMenu("scene.fxml", customerView.getScene().getWindow());
     }
 }

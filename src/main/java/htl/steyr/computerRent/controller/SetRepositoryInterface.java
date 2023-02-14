@@ -4,6 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface RepositoryAwareController {
+public interface SetRepositoryInterface {
     <T> void   setRepository(List<T> repository);
 }

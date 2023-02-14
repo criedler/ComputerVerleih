@@ -27,7 +27,7 @@ public class JavaFxApplication extends Application {
                         sources(ComputerVerleihApplication.class).
                         run(args);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("scene.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("controller/scene.fxml"));
 
         /*
          * Set spring as the factory (when controllers were generated).

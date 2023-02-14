@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class DeviceController implements RepositoryAwareController {
+public class DeviceController implements SetRepositoryInterface {
     @FXML
     private Label errorLabel;
     @FXML
@@ -93,10 +93,13 @@ public class DeviceController implements RepositoryAwareController {
         for (Object item : repository) {
             if (item instanceof DeviceRepository) {
                 deviceRepo = (DeviceRepository) item;
-            } else {
+            } else if(item instanceof BrandRepository) {
                 brandRepo = (BrandRepository) item;
             }
 
         }
+    }
+
+    public void backClicked(ActionEvent actionEvent) {
     }
 }

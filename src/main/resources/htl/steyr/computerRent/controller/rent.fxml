@@ -4,14 +4,21 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.RentController">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.RentController">
    <children>
-      <ListView fx:id="deviceView" layoutX="34.0" layoutY="46.0" onMouseClicked="#deviceViewClicked" prefHeight="309.0" prefWidth="200.0" />
-      <DatePicker fx:id="startDate" layoutX="276.0" layoutY="68.0" onAction="#startDateSelected" promptText="Start of period" />
-      <DatePicker fx:id="endDate" disable="true" layoutX="276.0" layoutY="137.0" onAction="#endDateSelected" promptText="End of Period" />
-      <ChoiceBox fx:id="brandChoiceBox" layoutX="276.0" layoutY="201.0" onAction="#filterByBrand" prefWidth="150.0" />
-      <Button layoutX="450.0" layoutY="201.0" mnemonicParsing="false" onAction="#clearFilter" text="clear" />
+      <ListView fx:id="deviceView" layoutX="35.0" layoutY="77.0" onMouseClicked="#deviceViewClicked" prefHeight="309.0" prefWidth="200.0" />
+      <DatePicker fx:id="startDate" layoutX="277.0" layoutY="99.0" onAction="#startDateSelected" promptText="Start of period" />
+      <DatePicker fx:id="endDate" disable="true" layoutX="277.0" layoutY="168.0" onAction="#endDateSelected" promptText="End of Period" />
+      <ChoiceBox fx:id="brandChoiceBox" layoutX="277.0" layoutY="232.0" onAction="#filterByBrand" prefWidth="150.0" />
+      <Button layoutX="451.0" layoutY="232.0" mnemonicParsing="false" onAction="#clearFilter" text="clear" />
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="675.0">
+         <menus>
+            <Menu mnemonicParsing="false" onAction="#backClicked" text="Back" />
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

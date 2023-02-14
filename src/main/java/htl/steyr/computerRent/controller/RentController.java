@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-public class RentController extends AbstractController implements RepositoryAwareController{
+public class RentController extends AbstractController implements SetRepositoryInterface {
     @FXML
     private AnchorPane mainPane;
     @FXML
@@ -128,5 +128,8 @@ public class RentController extends AbstractController implements RepositoryAwar
                 rentalRepo = (RentalRepository) item;
             }
         }
+    }
+
+    public void backClicked(ActionEvent actionEvent) {
     }
 }

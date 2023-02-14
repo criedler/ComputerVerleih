@@ -4,31 +4,43 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="408.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.CustomerController">
+<AnchorPane fx:id="mainPane" prefHeight="408.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.CustomerController">
    <children>
-      <ListView fx:id="customerView" layoutX="36.0" layoutY="26.0" onMouseClicked="#customerViewClicked" prefHeight="329.0" prefWidth="200.0" />
-      <TextField fx:id="firstnameField" layoutX="277.0" layoutY="27.0" promptText="*firstname*" />
-      <TextField fx:id="lastnameField" layoutX="467.0" layoutY="27.0" promptText="*lastname*" />
-      <TextField fx:id="zipcodeField" layoutX="277.0" layoutY="77.0" promptText="zipcode" />
-      <TextField fx:id="villageField" layoutX="467.0" layoutY="77.0" promptText="village" />
-      <TextField fx:id="streetField" layoutX="277.0" layoutY="135.0" promptText="street" />
-      <TextField fx:id="streetnumberField" layoutX="467.0" layoutY="135.0" promptText="streetnumber" />
-      <TextField fx:id="emailField" layoutX="277.0" layoutY="188.0" promptText="email" />
-      <ButtonBar layoutX="294.0" layoutY="259.0" prefHeight="40.0" prefWidth="200.0">
+      <ListView fx:id="customerView" layoutX="38.0" layoutY="50.0" onMouseClicked="#customerViewClicked" prefHeight="329.0" prefWidth="200.0" />
+      <TextField fx:id="firstnameField" layoutX="278.0" layoutY="50.0" promptText="*firstname" />
+      <TextField fx:id="lastnameField" layoutX="468.0" layoutY="50.0" promptText="*lastname" />
+      <TextField fx:id="zipcodeField" layoutX="278.0" layoutY="100.0" promptText="zipcode" />
+      <TextField fx:id="villageField" layoutX="468.0" layoutY="100.0" promptText="village" />
+      <TextField fx:id="streetField" layoutX="278.0" layoutY="158.0" promptText="street" />
+      <TextField fx:id="streetnumberField" layoutX="468.0" layoutY="158.0" promptText="streetnumber" />
+      <TextField fx:id="emailField" layoutX="278.0" layoutY="211.0" promptText="email" />
+      <ButtonBar layoutX="295.0" layoutY="282.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
             <Button mnemonicParsing="false" onAction="#saveClicked" text="Save" />
             <Button mnemonicParsing="false" onAction="#createClicked" text="Create" />
             <Button mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
          </buttons>
       </ButtonBar>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="271.0" layoutY="347.0" prefHeight="25.0" prefWidth="347.0" text="Undefined *required Field detected" textAlignment="CENTER" textFill="#cd1717" visible="false" wrapText="true">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="272.0" layoutY="370.0" prefHeight="25.0" prefWidth="347.0" text="Undefined *required Field detected" textAlignment="CENTER" textFill="#cd1717" visible="false" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <MenuBar layoutY="2.0" prefHeight="22.0" prefWidth="670.0">
+        <menus>
+          <Menu mnemonicParsing="false" onAction="#backClicked" text="Back">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#backClicked" text="MainMenu" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="544.0" layoutY="265.0" />
    </children>
 </AnchorPane>

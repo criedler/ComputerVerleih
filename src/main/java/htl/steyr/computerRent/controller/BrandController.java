@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class BrandController implements RepositoryAwareController {
+public class BrandController implements SetRepositoryInterface {
     @FXML
     private Label errorLabel;
     @FXML
@@ -70,6 +70,14 @@ public class BrandController implements RepositoryAwareController {
 
     @Override
     public <T> void setRepository(List<T> repository) {
-        this.brandRepo=(BrandRepository) repository.get(0);
+        for (Object item : repository) {
+            if (item instanceof BrandRepository) {
+                brandRepo = (BrandRepository) item;
+
+            }
+        }
+    }
+
+    public void backClicked(ActionEvent actionEvent) {
     }
 }

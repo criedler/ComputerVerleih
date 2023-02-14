@@ -2,6 +2,7 @@ package htl.steyr.computerRent.controller;
 
 import htl.steyr.computerRent.JavaFxApplication;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -10,8 +11,9 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class AbstractController implements PublisherInterface<Boolean> {
+public abstract class AbstractController implements PublisherInterface<Boolean> {
 
     private ArrayList<SubscriberInterface<Boolean>> list = new ArrayList<>();
 
@@ -35,6 +37,47 @@ public class AbstractController implements PublisherInterface<Boolean> {
 
         return controller;
     }
+
+    public  <T> void loadIntoWindow(String fileName, Window owner, List<T> repository) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(fileName));
+            fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+            fxmlLoader.setControllerFactory(JavaFxApplication.getSpringContext()::getBean);
+            Parent root = fxmlLoader.load();
+
+            SetRepositoryInterface controller = fxmlLoader.getController();
+
+            controller.setRepository(repository);
+
+            Scene scene = new Scene(root);
+            Stage currentStage = (Stage) owner.getScene().getWindow();
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadMainMenu(String fxmlFileName, Window owner) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(fxmlFileName));
+            fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+            fxmlLoader.setControllerFactory(JavaFxApplication.getSpringContext()::getBean);
+
+            Parent root = fxmlLoader.load();
+
+            Scene scene = new Scene(root);
+            Stage currentStage = (Stage) owner;
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public void addSubscriber(SubscriberInterface<Boolean> sub) {

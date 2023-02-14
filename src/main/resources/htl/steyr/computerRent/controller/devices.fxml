@@ -5,27 +5,34 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.DeviceController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.DeviceController">
    <children>
-      <ListView fx:id="deviceView" layoutX="26.0" layoutY="21.0" onMouseClicked="#deviceViewClicked" prefHeight="361.0" prefWidth="200.0" />
-      <TextField fx:id="modelnameField" layoutX="240.0" layoutY="54.0" promptText="Modelname" />
-      <TextField fx:id="priceField" layoutX="240.0" layoutY="111.0" promptText="Price" />
-      <ChoiceBox fx:id="brandChoiceBox" layoutX="240.0" layoutY="188.0" prefWidth="150.0" />
-      <ButtonBar layoutX="239.0" layoutY="234.0" prefHeight="40.0" prefWidth="200.0">
+      <ListView fx:id="deviceView" layoutX="28.0" layoutY="32.0" onMouseClicked="#deviceViewClicked" prefHeight="361.0" prefWidth="200.0" />
+      <TextField fx:id="modelnameField" layoutX="242.0" layoutY="65.0" promptText="Modelname" />
+      <TextField fx:id="priceField" layoutX="242.0" layoutY="122.0" promptText="Price" />
+      <ChoiceBox fx:id="brandChoiceBox" layoutX="242.0" layoutY="199.0" prefWidth="150.0" />
+      <ButtonBar layoutX="241.0" layoutY="245.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
             <Button mnemonicParsing="false" onAction="#saveClicked" text="Save" />
             <Button mnemonicParsing="false" onAction="#createClicked" text="Create" />
             <Button mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
          </buttons>
       </ButtonBar>
-      <Label fx:id="errorLabel" layoutX="322.0" layoutY="325.0" text="Undefined *required field" textFill="#801c1c">
+      <Label fx:id="errorLabel" layoutX="324.0" layoutY="336.0" text="Undefined *required field" textFill="#801c1c">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="673.0">
+         <menus>
+            <Menu mnemonicParsing="false" onAction="#backClicked" text="Back" />
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>
