@@ -23,7 +23,7 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
             "WHERE device_id NOT IN (\n" +
             "    SELECT d.device_id FROM device d\n" +
             "    LEFT OUTER JOIN rental r on d.device_id = r.device_id\n" +
-            "    WHERE NOT(return_date < ?1 OR date_of_issue  > ?2));", nativeQuery = true)
+            "    WHERE NOT(return_date < ?1 OR date_of_issue  > ?2 OR return_date IS NULL));", nativeQuery = true)
     List<Device> findAvaiableDevices(LocalDate startDate, LocalDate endDate);
 
     @Query(value = "SELECT d.*  FROM device d INNER JOIN rental r WHERE (r.total_cost is null) and r.customer_id=?1 ", nativeQuery = true)
