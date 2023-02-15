@@ -9,10 +9,21 @@ import java.util.List;
 
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
-    @Query(value = "SELECT d.* FROM device d INNER JOIN brand b on d.brand_id = b.brand_id LEFT OUTER JOIN rental r on d.device_id = r.device_id WHERE b.name=?1 and (return_date < ?2 or date_of_issue  > ?3 or return_date is null) ", nativeQuery = true)
-    List<Device> filterByBrand(String brandname, LocalDate startDate, LocalDate endDate);
+    @Query(value = "SELECT device.*\n" +
+            "FROM device INNER JOIN brand b on device.brand_id = b.brand_id\n" +
+            "WHERE device_id NOT IN (\n" +
+            "    SELECT d.device_id\n" +
+            "    FROM device d\n" +
+            "             LEFT OUTER JOIN rental r on d.device_id = r.device_id\n" +
+            "    WHERE NOT (return_date < ?2 OR date_of_issue > ?3))\n" +
+            "AND b.name = ?1 ;", nativeQuery = true)
+    List<Device> filterByBrand(String brandname,LocalDate startDate, LocalDate endDate);
 
-    @Query(value = "SELECT d.* FROM device d LEFT OUTER JOIN  rental r on d.device_id = r.device_id WHERE return_date < ?1 or date_of_issue  > ?2 or return_date is null", nativeQuery = true)
+    @Query(value = "SELECT device.* FROM device\n" +
+            "WHERE device_id NOT IN (\n" +
+            "    SELECT d.device_id FROM device d\n" +
+            "    LEFT OUTER JOIN rental r on d.device_id = r.device_id\n" +
+            "    WHERE NOT(return_date < ?1 OR date_of_issue  > ?2));", nativeQuery = true)
     List<Device> findAvaiableDevices(LocalDate startDate, LocalDate endDate);
 
     @Query(value = "SELECT d.*  FROM device d INNER JOIN rental r WHERE (r.total_cost is null) and r.customer_id=?1 ", nativeQuery = true)

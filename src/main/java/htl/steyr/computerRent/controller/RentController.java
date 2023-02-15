@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,31 +55,36 @@ public class RentController extends AbstractController implements SetRepositoryI
 
     public void initialize() {
         brandChoiceBox.getItems().setAll(brandRepo.findAll());
+
     }
 
     public void deviceViewClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
             deviceSelected = deviceView.getSelectionModel().getSelectedItem();
-            try {
-                RentController c = loadFxmlFile("selectCustomer.fxml", "Select Customer", mainPane.getScene().getWindow(), RentController.class);
-                selectCustomerView.getItems().setAll(customerRepo.findAll());
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (deviceSelected!=null) {
+                try {
+                    RentController c = loadFxmlFile("selectCustomer.fxml", "Select Customer", mainPane.getScene().getWindow(), RentController.class);
+                    selectCustomerView.getItems().setAll(customerRepo.findAll());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
     }
 
     public void startDateSelected(ActionEvent actionEvent) {
-        endDate.setDisable(false);
-        deviceView.getItems().clear();
-        endDate.setValue(null);
-        endDate.setDayCellFactory(datePicker -> new DateCell() {
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                setDisable(empty || date.compareTo(startDate.getValue()) < 0);
-            }
-        });
+        if (startDate.getValue()!=null) {
+            endDate.setDisable(false);
+            deviceView.getItems().clear();
+            endDate.setValue(null);
+            endDate.setDayCellFactory(datePicker -> new DateCell() {
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    setDisable(empty || date.compareTo(startDate.getValue()) < 0);
+                }
+            });
+        }
     }
 
     public void endDateSelected(ActionEvent actionEvent) {
@@ -88,14 +94,15 @@ public class RentController extends AbstractController implements SetRepositoryI
     }
 
     private void loadDeviceView() {
+        System.out.println(startDate.getValue());
+        System.out.println(endDate.getValue());
         deviceView.getItems().setAll(deviceRepo.findAvaiableDevices(startDate.getValue(), endDate.getValue()));
     }
 
     public void filterByBrand(ActionEvent actionEvent) {
         Brand selected = brandChoiceBox.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            deviceView.getItems().setAll(deviceRepo.filterByBrand(selected.getName(), startDate.getValue(), endDate.getValue()));
-        }
+            deviceView.getItems().setAll(deviceRepo.filterByBrand(selected.getName(),startDate.getValue(), endDate.getValue()));
+
     }
 
     public void rentNowClicked(ActionEvent actionEvent) {
@@ -103,11 +110,19 @@ public class RentController extends AbstractController implements SetRepositoryI
         LocalDate endPeriod = endDate.getValue();
         Rental rental = new Rental(startPeriod, endPeriod, customerSelected, deviceSelected);
         rentalRepo.save(rental);
+        deviceView.getItems().clear();
+
+
+        Stage currentStage= (Stage) rentBtn.getScene().getWindow();
+        currentStage.close();
+
     }
 
     public void selectCustomerViewClicked(MouseEvent mouseEvent) {
         customerSelected = selectCustomerView.getSelectionModel().getSelectedItem();
-        rentBtn.setDisable(false);
+        if (customerSelected != null){
+            rentBtn.setDisable(false);
+        }
     }
 
     public void clearFilter(ActionEvent actionEvent) {
