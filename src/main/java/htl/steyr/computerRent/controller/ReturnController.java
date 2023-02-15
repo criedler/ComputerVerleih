@@ -2,6 +2,7 @@ package htl.steyr.computerRent.controller;
 
 import htl.steyr.computerRent.model.Customer;
 import htl.steyr.computerRent.model.Device;
+import htl.steyr.computerRent.model.Rental;
 import htl.steyr.computerRent.repo.CustomerRepository;
 import htl.steyr.computerRent.repo.DeviceRepository;
 import htl.steyr.computerRent.repo.RentalRepository;
@@ -23,13 +24,18 @@ import java.util.List;
 
 @Component
 public class ReturnController extends AbstractController implements SetRepositoryInterface {
+
+
+    @FXML
+    private AnchorPane mainPane;
+
     private static final int chargeCycle = 5;
+    public ListView<Rental> rentalView;
     @FXML
     private ListView<Customer> customerView;
     @FXML
     private ListView<Device> rentedDevicesView;
-    @FXML
-    private AnchorPane mainPane;
+
     @FXML
     private TextField chargeCycleField;
 
@@ -44,6 +50,8 @@ public class ReturnController extends AbstractController implements SetRepositor
     private Customer customerSelected;
 
     private Device deviceSelected;
+
+    private Rental rentalSelected;
 
     @Autowired
     CustomerRepository customerRepo;
@@ -61,20 +69,37 @@ public class ReturnController extends AbstractController implements SetRepositor
 
     public void customerViewClicked(MouseEvent mouseEvent) {
         customerSelected = customerView.getSelectionModel().getSelectedItem();
-        rentedDevicesView.getItems().setAll(deviceRepo.findOpenRentals(customerSelected.getCustomerId()));
+        if (customerSelected!=null) {
+            rentedDevicesView.getItems().setAll(deviceRepo.findOpenRentals(customerSelected.getCustomerId()));
+        }
     }
 
     public void rentedDevicesViewClicked(MouseEvent mouseEvent) {
         deviceSelected = rentedDevicesView.getSelectionModel().getSelectedItem();
-        loadDialog();
-        setPriceForPeriod();
-        disableBtnOnNullInput();
-        onlyAllowNumericInput();
-        checkChargeCycleFieldInput();
+        if (deviceSelected!=null) {
+            loadSelectRentalDialog();
+        }
+
+    }
+
+    private void loadSelectRentalDialog() {
+        try {
+            loadFxmlFile("selectRental.fxml", "Select Rental ", mainPane.getScene().getWindow(), ReturnController.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        rentalView.getItems().setAll(rentalRepo.findRentalsForDevice(deviceSelected.getDeviceId()));
+    }
+
+    public void rentalViewClicked(MouseEvent mouseEvent) {
+        rentalSelected = rentalView.getSelectionModel().getSelectedItem();
+        if (rentalSelected!=null){
+            loadDialog();
+        }
     }
 
     private void setPriceForPeriod() {
-        priceForPeriod = deviceRepo.getTotalPrice(deviceSelected.getDeviceId());
+        priceForPeriod = deviceRepo.getTotalPrice(rentalSelected.getRentalId());
     }
 
     private void loadDialog() {
@@ -83,6 +108,10 @@ public class ReturnController extends AbstractController implements SetRepositor
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setPriceForPeriod();
+        disableBtnOnNullInput();
+        onlyAllowNumericInput();
+        checkChargeCycleFieldInput();
     }
 
     private void onlyAllowNumericInput() {
@@ -147,4 +176,6 @@ public class ReturnController extends AbstractController implements SetRepositor
     public void backClicked(ActionEvent actionEvent) {
         loadMainMenu("scene.fxml",mainPane.getScene().getWindow());
     }
+
+
 }

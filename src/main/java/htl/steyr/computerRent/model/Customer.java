@@ -37,17 +37,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;
 
-    public Customer(String firstName, String lastname, String zipcode, String village, String street, String streetnumber, String email, List<Rental> rentals) {
-        this.firstName = firstName;
-        this.lastName = lastname;
-        this.zipcode = zipcode;
-        this.village = village;
-        this.street = street;
-        this.streetNumber = streetnumber;
-        this.email = email;
-        this.rentals = rentals;
-    }
-
     public Customer() {
     }
 

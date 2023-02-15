@@ -19,11 +19,6 @@ public class Brand {
     @OneToMany(mappedBy = "brand")
     private List<Device> devices;
 
-    public Brand(String name, List<Device> devices) {
-        this.name = name;
-        this.devices = devices;
-    }
-
     public Brand() {
     }
 

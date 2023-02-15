@@ -41,7 +41,7 @@ public class Rental {
 
     @Override
     public String toString() {
-        return customer + " " + device;
+        return device + " " + dateOfIssue + " - " + returnDate;
     }
 
     public int getRentalId() {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.ReturnController">
+   <children>
+      <ListView fx:id="rentalView" layoutX="143.0" layoutY="16.0" onMouseClicked="#rentalViewClicked" prefHeight="369.0" prefWidth="275.0" />
+   </children>
+</AnchorPane>

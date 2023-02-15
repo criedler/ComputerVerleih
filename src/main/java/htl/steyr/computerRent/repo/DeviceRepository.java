@@ -1,6 +1,7 @@
 package htl.steyr.computerRent.repo;
 
 import htl.steyr.computerRent.model.Device;
+import htl.steyr.computerRent.model.Rental;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -26,15 +27,17 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
             "   WHERE NOT(return_date < ?1 OR date_of_issue  > ?2 OR return_date IS NULL));", nativeQuery = true)
     List<Device> findAvaiableDevices(LocalDate startDate, LocalDate endDate);
 
-    @Query(value = "SELECT d.*  FROM device d " +
+    @Query(value = "SELECT DISTINCT d.*  FROM device d " +
             "INNER JOIN rental r ON d.device_id = r.device_id " +
             "WHERE (r.total_cost IS NULL) " +
-            "AND r.customer_id=?1 ", nativeQuery = true)
+            "AND r.customer_id=?1 ;", nativeQuery = true)
     List<Device> findOpenRentals(int customerID);
+
+
 
     @Query(value = "SELECT price * DATEDIFF(r.return_date,r.date_of_issue) AS total_price FROM device d " +
             "INNER JOIN rental r ON d.device_id = r.device_id " +
-            "WHERE r.device_id=?1  ",nativeQuery = true)
-    int getTotalPrice(int deviceID);
+            "WHERE r.rental_id=?1",nativeQuery = true)
+    int getTotalPrice(int rental_id);
 
 }
