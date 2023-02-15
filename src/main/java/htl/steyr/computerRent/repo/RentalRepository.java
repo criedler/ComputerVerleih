@@ -15,6 +15,7 @@ import java.util.List;
 public interface RentalRepository extends JpaRepository<Rental,Integer> {
     @Transactional
     @Modifying
-    @Query(value = "UPDATE rental SET total_cost = ?2 WHERE device_id = ?1",nativeQuery = true)
+    @Query(value = "UPDATE rental SET total_cost = ?2 " +
+            "WHERE device_id = ?1",nativeQuery = true)
     void insertFinalPrice(int deviceID, double totalPrice);
 }
