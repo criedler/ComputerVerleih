@@ -15,7 +15,7 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
             "    SELECT d.device_id\n" +
             "    FROM device d\n" +
             "             LEFT OUTER JOIN rental r on d.device_id = r.device_id\n" +
-            "    WHERE NOT (return_date < ?2 OR date_of_issue > ?3))\n" +
+            "    WHERE NOT (return_date < ?2 OR date_of_issue > ?3 OR return_date IS NULL))\n" +
             "AND b.name = ?1 ;", nativeQuery = true)
     List<Device> filterByBrand(String brandname,LocalDate startDate, LocalDate endDate);
 
