@@ -30,7 +30,6 @@ public class ReturnController extends AbstractController implements SetRepositor
     private AnchorPane mainPane;
 
     private static final int chargeCycle = 5;
-    public ListView<Rental> rentalView;
     @FXML
     private ListView<Customer> customerView;
     @FXML
@@ -52,6 +51,10 @@ public class ReturnController extends AbstractController implements SetRepositor
     private Device deviceSelected;
 
     private Rental rentalSelected;
+
+    @FXML
+    private ListView<Rental> rentalView;
+
 
     @Autowired
     CustomerRepository customerRepo;
