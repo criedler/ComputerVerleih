@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class BrandController extends AbstractController implements SetRepositoryInterface {
+public class BrandController extends AbstractController {
     @FXML
     private Label errorLabel;
     @FXML
@@ -23,6 +23,7 @@ public class BrandController extends AbstractController implements SetRepository
     private TextField brandnameField;
     @Autowired
     private BrandRepository brandRepo;
+
     private Brand brandSelected = null;
 
     public void initialize() {
@@ -68,17 +69,8 @@ public class BrandController extends AbstractController implements SetRepository
         }
     }
 
-    @Override
-    public <T> void setRepository(List<T> repository) {
-        for (Object item : repository) {
-            if (item instanceof BrandRepository) {
-                brandRepo = (BrandRepository) item;
-
-            }
-        }
-    }
 
     public void backClicked(ActionEvent actionEvent) {
-        loadMainMenu("scene.fxml",brandView.getScene().getWindow());
+        loadFxmlFile("scene.fxml","Menu",brandView.getScene().getWindow());
     }
 }

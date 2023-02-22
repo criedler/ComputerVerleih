@@ -5,14 +5,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" prefHeight="325.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.ReturnController">
+<AnchorPane fx:id="mainPane" prefHeight="325.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.ReturnController">
    <children>
-      <ListView fx:id="customerView" layoutX="45.0" layoutY="29.0" onMouseClicked="#customerViewClicked" prefHeight="267.0" prefWidth="200.0" />
-      <ButtonBar layoutX="271.0" layoutY="256.0" prefHeight="40.0" prefWidth="200.0">
+      <ListView fx:id="customerView" layoutX="14.0" layoutY="29.0" onMouseClicked="#customerViewClicked" prefHeight="267.0" prefWidth="200.0" />
+      <ButtonBar layoutX="305.0" layoutY="285.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button fx:id="returnContinue" mnemonicParsing="false" onAction="#rentalSelectContinue" text="Continue" />
-            <Button mnemonicParsing="false" onAction="#rentalSelectBack" text="Go Back" />
+            <Button mnemonicParsing="false" onAction="#backClicked" text="Go Back" />
          </buttons>
       </ButtonBar>
+      <ListView fx:id="rentedDevicesView" layoutX="228.0" layoutY="29.0" onMouseClicked="#rentedDevicesViewClicked" prefHeight="267.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

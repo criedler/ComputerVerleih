@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class DeviceController extends AbstractController implements SetRepositoryInterface {
+public class DeviceController extends AbstractController{
     @FXML
     private Label errorLabel;
     @FXML
@@ -29,13 +29,13 @@ public class DeviceController extends AbstractController implements SetRepositor
     @FXML
     private ChoiceBox<Brand> brandChoiceBox;
 
-    private Device deviceSelected = null;
-
     @Autowired
     private DeviceRepository deviceRepo;
 
     @Autowired
     BrandRepository brandRepo;
+
+    private Device deviceSelected = null;
 
     public void initialize() {
         errorLabel.setVisible(false);
@@ -44,7 +44,8 @@ public class DeviceController extends AbstractController implements SetRepositor
         brandChoiceBox.getItems().setAll(brandRepo.findAll());
     }
 
-    public void saveClicked(ActionEvent actionEvent) {
+    @FXML
+    void saveClicked(ActionEvent actionEvent) {
         errorLabel.setVisible(false);
 
         if (deviceSelected == null) {
@@ -63,14 +64,16 @@ public class DeviceController extends AbstractController implements SetRepositor
 
     }
 
-    public void createClicked() {
+    @FXML
+    void createClicked() {
         deviceSelected = null;
         modelnameField.clear();
         priceField.clear();
         brandChoiceBox.setValue(null);
     }
 
-    public void deleteClicked(ActionEvent actionEvent) {
+    @FXML
+    void deleteClicked(ActionEvent actionEvent) {
         if (deviceSelected != null) {
             deviceRepo.delete(deviceSelected);
             deviceView.getItems().setAll(deviceRepo.findAll());
@@ -79,7 +82,8 @@ public class DeviceController extends AbstractController implements SetRepositor
         initialize();
     }
 
-    public void deviceViewClicked(MouseEvent mouseEvent) {
+    @FXML
+    void deviceViewClicked(MouseEvent mouseEvent) {
         deviceSelected = deviceView.getSelectionModel().getSelectedItem();
         if (deviceSelected != null) {
             modelnameField.setText(deviceSelected.getModelName());
@@ -88,19 +92,8 @@ public class DeviceController extends AbstractController implements SetRepositor
         }
     }
 
-    @Override
-    public <T> void setRepository(List<T> repository) {
-        for (Object item : repository) {
-            if (item instanceof DeviceRepository) {
-                deviceRepo = (DeviceRepository) item;
-            } else if(item instanceof BrandRepository) {
-                brandRepo = (BrandRepository) item;
-            }
-
-        }
-    }
-
-    public void backClicked(ActionEvent actionEvent) {
-        loadMainMenu("scene.fxml",deviceView.getScene().getWindow());
+    @FXML
+    void backClicked(ActionEvent actionEvent) {
+        loadFxmlFile("scene.fxml","Menu", deviceView.getScene().getWindow());
     }
 }

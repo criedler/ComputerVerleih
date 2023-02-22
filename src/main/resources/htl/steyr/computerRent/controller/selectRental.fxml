@@ -7,17 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.ReturnSelectRentalController">
    <children>
-      <ListView fx:id="rentalView" layoutX="46.0" layoutY="38.0" prefHeight="325.0" prefWidth="240.0" />
+      <ListView fx:id="rentalView" layoutX="46.0" layoutY="38.0" onMouseClicked="#rentalViewClicked" prefHeight="325.0" prefWidth="240.0" />
       <ButtonBar layoutX="336.0" layoutY="323.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-            <Button mnemonicParsing="false" onAction="#rentalSelectContinue" text="Continue" />
-          <Button mnemonicParsing="false" onAction="#rentalSelectBack" text="Go Back" />
+          <Button mnemonicParsing="false" onAction="#backClicked" text="Go Back" />
         </buttons>
       </ButtonBar>
-      <Label layoutX="316.0" layoutY="38.0" prefHeight="142.0" prefWidth="240.0" text="Please select the rental you want to return for this device" wrapText="true">
+      <Label layoutX="316.0" layoutY="38.0" prefHeight="142.0" prefWidth="240.0" text="Please double click the rental you want to return for this device" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>

@@ -4,9 +4,12 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.RentController">
+<AnchorPane fx:id="mainPane" prefHeight="387.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.RentSelectCustomerController">
    <children>
-      <ListView fx:id="selectCustomerView" layoutX="48.0" layoutY="13.0" onMouseClicked="#selectCustomerViewClicked" prefHeight="347.0" prefWidth="200.0" />
-      <Button fx:id="rentBtn" disable="true" layoutX="252.0" layoutY="14.0" mnemonicParsing="false" onAction="#rentNowClicked" prefHeight="61.0" prefWidth="96.0" text="Rent Now" />
+      <ListView fx:id="selectCustomerView" layoutX="14.0" layoutY="14.0" onMouseClicked="#selectCustomerViewClicked" prefHeight="347.0" prefWidth="200.0" />
+      <Button fx:id="rentBtn" disable="true" layoutX="214.0" layoutY="14.0" mnemonicParsing="false" onAction="#rentNowClicked" prefHeight="61.0" prefWidth="96.0" text="Rent Now" />
+      <Button layoutX="396.0" layoutY="336.0" mnemonicParsing="false" onAction="#backClicked" text="Go back" />
+      <Button fx:id="undoBtn" disable="true" layoutX="214.0" layoutY="75.0" mnemonicParsing="false" onAction="#undoClicked" prefHeight="69.0" prefWidth="96.0" text="Undo last rent" />
+      <Button fx:id="finishBtn" disable="true" layoutX="310.0" layoutY="336.0" mnemonicParsing="false" onAction="#finishbtnClicked" text="Finish" />
    </children>
 </AnchorPane>

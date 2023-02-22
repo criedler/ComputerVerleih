@@ -1,43 +1,36 @@
 package htl.steyr.computerRent.repo;
 
+import htl.steyr.computerRent.model.Brand;
 import htl.steyr.computerRent.model.Device;
 import htl.steyr.computerRent.model.Rental;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
-
-    @Query(value = "SELECT device.*" +
-            "FROM device INNER JOIN brand b ON device.brand_id = b.brand_id " +
-            "WHERE device_id NOT IN (" +
-            "   SELECT d.device_id" +
-            "   FROM device d" +
-            "   LEFT OUTER JOIN rental r ON d.device_id = r.device_id" +
-            "   WHERE NOT (return_date < ?2 OR date_of_issue > ?3 OR return_date IS NULL)) " +
-            "AND b.name = ?1 ;", nativeQuery = true)
-    List<Device> filterByBrand(String brandname,LocalDate startDate, LocalDate endDate);
-
-    @Query(value = "SELECT device.* FROM device " +
-            "WHERE device_id NOT IN (" +
-            "   SELECT d.device_id FROM device d" +
-            "   LEFT OUTER JOIN rental r on d.device_id = r.device_id" +
-            "   WHERE NOT(return_date < ?1 OR date_of_issue  > ?2 OR return_date IS NULL));", nativeQuery = true)
-    List<Device> findAvaiableDevices(LocalDate startDate, LocalDate endDate);
+    @Query(value = "SELECT d FROM Device d JOIN d.brand b " +
+            "WHERE d.deviceId NOT IN (" +
+            "SELECT d.deviceId FROM Device d " +
+            "LEFT JOIN d.rentals r " +
+            "WHERE NOT(r.returnDate < :startDate OR r.dateOfIssue > :endDate OR r.returnDate IS NULL))" +
+            "AND (:brand is null or d .brand= :brand) " +
+            "AND (:model = '' or d.modelName = :model)")
+    List<Device> findAvaiableDevices(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate,
+                                     @Param("brand") Brand brand, @Param("model") String modelname);
 
     @Query(value = "SELECT DISTINCT d.*  FROM device d " +
             "INNER JOIN rental r ON d.device_id = r.device_id " +
             "WHERE (r.total_cost IS NULL) " +
-            "AND r.customer_id=?1 ;", nativeQuery = true)
-    List<Device> findOpenRentals(int customerID);
-
+            "AND r.customer_id=:customerID ;", nativeQuery = true)
+    List<Device> findOpenRentals(@Param("customerID") int customerID);
 
 
     @Query(value = "SELECT price * DATEDIFF(r.return_date,r.date_of_issue) AS total_price FROM device d " +
             "INNER JOIN rental r ON d.device_id = r.device_id " +
-            "WHERE r.rental_id=?1",nativeQuery = true)
-    int getTotalPrice(int rental_id);
+            "WHERE r.rental_id=:rentalID", nativeQuery = true)
+    int getTotalPrice(@Param("rentalID") int rentalID);
 
 }
