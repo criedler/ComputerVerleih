@@ -91,9 +91,10 @@ public class RentSelectCustomerController extends AbstractController{
 
     @FXML
     void finishbtnClicked(ActionEvent event) {
-        loadFxmlFile("finishedRent.fxml", "finished", mainPane.getScene().getWindow());
+        loadDialog("finishedRent.fxml", "finished", mainPane.getScene().getWindow());
         OverviewLbl.setText("Rental entry made for Device "+device + " on the customer " + customerSelected
                 + " from " + startDate + " till "+ endDate );
+
     }
 
 

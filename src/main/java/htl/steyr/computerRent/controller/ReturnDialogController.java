@@ -54,7 +54,7 @@ public class ReturnDialogController extends AbstractController {
     @FXML
     void returnClicked(ActionEvent actionEvent) {
         rentalRepo.insertFinalPrice(deviceSelected.getDeviceId(), totalPrice);
-        loadFxmlFile("finishedReturn.fxml", "finished Return", mainPane.getScene().getWindow());
+        loadDialog("finishedReturn.fxml", "finished Return", mainPane.getScene().getWindow());
         OverviewLbl.setText("Returned device " + deviceSelected +
                 " with the rent period " + rentalSelected.getDateOfIssue() + " - " + rentalSelected.getReturnDate() +
                 " for the Customer " + rentalSelected.getCustomer());
