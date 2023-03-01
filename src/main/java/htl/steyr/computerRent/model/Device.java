@@ -50,7 +50,7 @@ public class Device {
         this.modelName = modelName;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 

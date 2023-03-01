@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.DeviceController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.DeviceController">
    <children>
       <ListView fx:id="deviceView" layoutX="28.0" layoutY="32.0" onMouseClicked="#deviceViewClicked" prefHeight="361.0" prefWidth="200.0" />
-      <TextField fx:id="modelnameField" layoutX="242.0" layoutY="65.0" promptText="Modelname" />
-      <TextField fx:id="priceField" layoutX="242.0" layoutY="122.0" promptText="Price" />
+      <TextField fx:id="modelnameField" layoutX="242.0" layoutY="65.0" promptText="*Modelname" />
+      <TextField fx:id="priceField" layoutX="242.0" layoutY="122.0" promptText="*Price in cent" />
       <ChoiceBox fx:id="brandChoiceBox" layoutX="242.0" layoutY="199.0" prefWidth="150.0" />
       <ButtonBar layoutX="241.0" layoutY="245.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>

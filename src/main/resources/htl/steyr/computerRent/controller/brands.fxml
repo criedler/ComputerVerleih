@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.BrandController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.computerRent.controller.BrandController">
    <children>
       <ListView fx:id="brandView" layoutX="29.0" layoutY="44.0" onMouseClicked="#brandViewClicked" prefHeight="342.0" prefWidth="200.0" />
-      <TextField fx:id="brandnameField" alignment="CENTER" layoutX="300.0" layoutY="71.0" promptText="*brandname*" />
+      <TextField fx:id="brandnameField" alignment="CENTER" layoutX="300.0" layoutY="71.0" promptText="*brandname" />
       <ButtonBar layoutX="229.0" layoutY="241.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#saveClicked" text="Save" />
